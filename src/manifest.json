@@ -1,0 +1,66 @@
+{
+  "manifest_version": 2,
+  "name": "Attach from Clipboard",
+  "description": "Create message attachments directly from the system clipboard.",
+  "version": "2.5.2.0",
+  "author": "Michael Ganss",
+  "homepage_url": "https://www.updatestar.com/dl/clipboard/clipboard.html",
+  "applications": {
+    "gecko": {
+      "id": "clipboard@ganss.org",
+      "strict_min_version": "128.0",
+      "strict_max_version": "157.*"
+    }
+  },
+  "icons": {
+    "32": "assets/icon.svg",
+    "48": "assets/icon.svg",
+    "96": "assets/icon.svg"
+  },
+  "commands": {
+    "insert_from_clipboard": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Insert"
+      },
+      "description": "__MSG_errorTitle__"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "experiment_apis": {
+    "AttachMenu": {
+      "schema": "api/AttachMenu/schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "AttachMenu"
+          ]
+        ],
+        "script": "api/AttachMenu/implementation.js"
+      }
+    }
+  },
+  "background": {
+    "type": "module",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "default_locale": "en-US",
+  "permissions": [
+    "clipboardRead",
+    "compose",
+    "menus",
+    "notifications",
+    "storage"
+  ],
+  "compose_action": {
+    "default_title": "__MSG_attachFromClipboard.label__",
+    "default_icon": "assets/icon.svg",
+    "default_area": "maintoolbar"
+  }
+}

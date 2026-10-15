@@ -1,0 +1,68 @@
+[
+  {
+    "namespace": "AttachMenu",
+    "functions": [
+      {
+        "name": "inject",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          {
+            "name": "windowId",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "readCopiedFiles",
+        "type": "function",
+        "async": true,
+        "description": "Reads files copied in a GNOME-style file manager (x-special/gnome-copied-files).",
+        "parameters": [
+          {
+            "name": "windowId",
+            "type": "integer"
+          }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "base64": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "diag": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "any"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "events": [
+      {
+        "name": "onClicked",
+        "type": "function",
+        "description": "Fires when the user clicks the extra entry in the composer's attach menu.",
+        "parameters": [
+          {
+            "$ref": "tabs.Tab",
+            "name": "tab"
+          }
+        ]
+      }
+    ]
+  }
+]

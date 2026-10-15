@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Attach from Clipboard</title>
+<style>
+body{font:14px sans-serif;margin:12px}
+label{display:block;padding:4px 0}
+#diag{font:11px monospace;white-space:pre-wrap;word-break:break-all;margin-top:8px;user-select:text}
+button{margin-top:10px;margin-right:6px}
+small{color:#777}
+</style></head>
+<body>
+<h3 id="title">Clipboard contents</h3>
+<div id="list"></div>
+<div id="empty" hidden>Nothing usable was found on the clipboard.</div>
+<div id="diag"></div>
+<button id="attach">Attach selected</button><button id="cancel">Cancel</button>
+<script type="module" src="chooser.js"></script>
+</body></html>
