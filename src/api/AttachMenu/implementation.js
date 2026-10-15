@@ -213,7 +213,7 @@
               }
             }
             let diag = {
-              sample: JSON.stringify(text.slice(0, 120)),
+              lineCount: fileLines(text).length,
               valueType: value ? Object.prototype.toString.call(value) : null,
               textLength: text.length,
               transferError,
@@ -232,12 +232,41 @@
             } catch (e) {
               diag.availableError = String(e);
             }
+            // Only attach files below the user's home folder (also the real
+            // home when running as a snap) and never from hidden folders such
+            // as ~/.ssh or ~/.gnupg, so a hostile clipboard cannot pull in
+            // secrets.
+            let homes = [];
+            try {
+              let home = Services.dirsvc.get("Home", Ci.nsIFile).path;
+              homes.push(home);
+              let snapMatch = home.match(/^(\/home\/[^/]+)\/snap\//);
+              if (snapMatch) {
+                homes.push(snapMatch[1]);
+              }
+            } catch (e) {
+              diag.homeError = String(e);
+            }
+            const isAllowed = path => {
+              let parts = path.split("/");
+              if (!path.startsWith("/") || parts.includes("..") || parts.includes(".")) {
+                return false;
+              }
+              if (parts.some(part => part.startsWith("."))) {
+                return false;
+              }
+              return homes.some(h => path.startsWith(h.replace(/\/$/, "") + "/"));
+            };
             let result = [];
             diag.fileErrors = [];
             let seen = new Set();
             for (let line of fileLines(text)) {
               try {
                 let path = decodeURIComponent(line.slice("file://".length));
+                if (!isAllowed(path)) {
+                  diag.fileErrors.push(path.split("/").pop() + " -> blocked (outside home folder or hidden path)");
+                  continue;
+                }
                 let bytes = await (typeof IOUtils != "undefined" ? IOUtils : window.IOUtils).read(path);
                 let base64 = "";
                 for (let i = 0; i < bytes.length; i += 0x8000) {

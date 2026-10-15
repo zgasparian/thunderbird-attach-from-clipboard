@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Attach from Clipboard (GNOME files)",
   "description": "Create message attachments directly from the system clipboard.",
-  "version": "2.6.1.0",
+  "version": "2.6.2.0",
   "author": "Zareh Kasparian",
   "homepage_url": "https://github.com/zgasparian/thunderbird-attach-from-clipboard",
   "applications": {

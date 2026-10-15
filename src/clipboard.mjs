@@ -170,7 +170,11 @@ async function collectCandidates(tab) {
     }
 
     const pasted = await pasteViaPopup();
-    lastDiag.popup = { ...pasted, files: pasted.files.length };
+    // Never keep clipboard contents in the diagnostics.
+    lastDiag.popup = {
+        types: pasted.types, fired: pasted.fired, focused: pasted.focused,
+        error: pasted.error, apiTypes: pasted.apiTypes, files: pasted.files.length,
+    };
     for (const file of pasted.files) {
         add(`File: ${file.name}`, file);
     }

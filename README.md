@@ -44,6 +44,15 @@ format, so the original add-on found "nothing" and attached nothing.
 | Default shortcut Ctrl+Shift+I | Changed to Ctrl+Shift+Insert |
 | Hard to know which build is installed | Version bumped each build and shown in notifications / error window |
 
+## Security notes
+
+- Files are read only on your action (shortcut / menu).
+- Only files below your home folder are attached; hidden folders (`.ssh`,
+  `.gnupg`, ...) and `..` paths are refused.
+- Diagnostics never include clipboard text.
+- The add-on makes no network requests; updates come from this repo's
+  `updates.json`, so protect the GitHub account (2FA).
+
 ## Files
 
 - `src/` – the add-on source (`background.js`, `clipboard.mjs`, `api/AttachMenu/`, ...)

@@ -3,9 +3,9 @@
     "attach-from-clipboard-gnome@zgasparian.github.io": {
       "updates": [
         {
-          "version": "2.6.1.0",
-          "update_link": "https://github.com/zgasparian/thunderbird-attach-from-clipboard/releases/download/v2.6.1.0/attach_from_clipboard-2.6.1.0-tb.xpi",
-          "update_hash": "sha256:7612d3918be3e60858424d97c901f184b9e9b96b248f5b88758a7dfb3981195e"
+          "version": "2.6.2.0",
+          "update_link": "https://github.com/zgasparian/thunderbird-attach-from-clipboard/releases/download/v2.6.2.0/attach_from_clipboard-2.6.2.0-tb.xpi",
+          "update_hash": "sha256:6821164f60552d3d49dc2b4b8e6b65ea7a7b7ef73cc1ef7de8be7a93c37fe660"
         }
       ]
     }
